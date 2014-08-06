@@ -14,9 +14,13 @@ ADD datastax_key /tmp/datastax_key
 RUN apt-key add /tmp/datastax_key
 RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
 
+# Workaround for https://github.com/docker/docker/issues/6345
+RUN ln -s -f /bin/true /usr/bin/chfn
+
 # Install OpenJDK 7 and Cassandra 2.0.9
 RUN apt-get update
 RUN apt-get install -y openjdk-7-jdk libjna-java
+
 RUN apt-get install -y dsc20
 ENV CASSANDRA_CONFIG /etc/cassandra
 

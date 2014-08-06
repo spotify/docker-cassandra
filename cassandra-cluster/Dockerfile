@@ -3,7 +3,7 @@
 # VERSION               0.1
 #
 # Expects CASSANDRA_SEEDS and CASSANDRA_TOKEN env variables to be set.
-# If CASSANDRA_SEEDS is not set, node acts as it's own seed
+# If CASSANDRA_SEEDS is not set, node acts as its own seed
 # If CASSANDRA_TOKEN is not set, startup process is aborted
 
 FROM spotify/cassandra:base

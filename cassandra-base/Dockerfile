@@ -15,7 +15,9 @@ RUN apt-key add /tmp/datastax_key
 RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
 
 # Install OpenJDK 7 and Cassandra 2.0.9
-RUN apt-get update && apt-get install -y openjdk-7-jdk cassandra=2.0.9
+RUN apt-get update
+RUN apt-get install -y openjdk-7-jdk libjna-java
+RUN apt-get install -y dsc20
 ENV CASSANDRA_CONFIG /etc/cassandra
 
 # Run base config script

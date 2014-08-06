@@ -4,7 +4,7 @@
 #
 # Starts a Cassandra instance constituting a one node cluster. 
 
-FROM cassandra/base
+FROM spotify/cassandra:base
 
 USER root
 

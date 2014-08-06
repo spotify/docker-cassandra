@@ -6,7 +6,7 @@
 # If CASSANDRA_SEEDS is not set, node acts as it's own seed
 # If CASSANDRA_TOKEN is not set, startup process is aborted
 
-FROM cassandra/base
+FROM spotify/cassandra:base
 
 USER root
 

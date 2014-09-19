@@ -5,7 +5,7 @@
 # Installs Cassandra 2.0 package. Does only basic configuration.
 # Tokens and seed nodes should be configured by child images.
 
-FROM ubuntu:trusty
+FROM dockerfile/java:oracle-java7
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -14,17 +14,12 @@ ADD datastax_key /tmp/datastax_key
 RUN apt-key add /tmp/datastax_key
 RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
 
-# Add Oracle JRE sources
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
-RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/webupd8.list
-
 # Workaround for https://github.com/docker/docker/issues/6345
 RUN ln -s -f /bin/true /usr/bin/chfn
 
-# Install Oracle JRE 7 and Cassandra 2.0.9
+# Install Cassandra 2.0.9
 RUN apt-get update
-RUN apt-get install -y oracle-java7-set-default dsc20
+RUN apt-get install -y dsc20
 
 ENV CASSANDRA_CONFIG /etc/cassandra
 

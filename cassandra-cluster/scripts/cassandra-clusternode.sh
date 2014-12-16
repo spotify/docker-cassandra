@@ -2,6 +2,7 @@
 
 # Get running container's IP
 IP=`hostname --ip-address`
+IP=`echo $IP | awk -F" " '{print $1}'`
 if [ $# == 1 ]; then SEEDS="$1,$IP"; 
 else SEEDS="$IP"; fi
 

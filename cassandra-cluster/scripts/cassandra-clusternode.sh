@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Get running container's IP
-IP=`hostname --ip-address`
-IP=`echo $IP | awk -F" " '{print $1}'`
+IP=`hostname --ip-address | cut -f 1 -d ' '`
 if [ $# == 1 ]; then SEEDS="$1,$IP"; 
 else SEEDS="$IP"; fi
 

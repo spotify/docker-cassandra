@@ -6,7 +6,8 @@ if [ $# == 1 ]; then SEEDS="$1,$IP";
 else SEEDS="$IP"; fi
 
 
-# Dunno why zeroes here
+# 0.0.0.0 Listens on all configured interfaces
+# but you must set the broadcast_rpc_address to a value other than 0.0.0.0
 sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Be your own seed

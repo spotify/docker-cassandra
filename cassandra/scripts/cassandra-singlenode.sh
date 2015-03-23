@@ -30,4 +30,4 @@ if [ ! -z "$CASSANDRA_DC" ]; then
     echo "default=$CASSANDRA_DC:rac1" > $CASSANDRA_CONFIG/cassandra-topology.properties
 fi
 
-cassandra -f
+exec cassandra -f

@@ -38,4 +38,4 @@ echo "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$IP\"" >> $CASSANDRA_CONF
 
 echo "Starting Cassandra on $IP..."
 
-cassandra -f
+exec cassandra -f

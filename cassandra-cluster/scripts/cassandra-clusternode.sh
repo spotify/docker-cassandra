@@ -44,8 +44,8 @@ fi
 echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.initial_token=$CASSANDRA_TOKEN\"" >> $CASSANDRA_CONFIG/cassandra-env.sh
 
 # Most likely not needed
-echo "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$IP\"" >> $CASSANDRA_CONFIG/cassandra-env.sh
+echo "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=$EIP\"" >> $CASSANDRA_CONFIG/cassandra-env.sh
 
-echo "Starting Cassandra on $IP..."
+echo "Starting Cassandra on $EIP..."
 
 exec cassandra -f

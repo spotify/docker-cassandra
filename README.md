@@ -25,7 +25,9 @@ In the box
 
   Runs a Cassandra cluster. Expects `CASSANDRA_SEEDS` and `CASSANDRA_TOKEN` env variables to be set.
   If `CASSANDRA_SEEDS` is not set, node acts as its own seed. If `CASSANDRA_TOKEN` is not set, the
-  container will not run. Built from the `cassandra-cluster` directory.
+  container will not run. Built from the `cassandra-cluster` directory. If `CASSANDRA_BROADCAST_ADDRESS`
+  is set use this address for external communication with other cassandra nodes (typical use case:
+  multi-node docker setup) 
 
 * **spotify/cassandra:base**
 

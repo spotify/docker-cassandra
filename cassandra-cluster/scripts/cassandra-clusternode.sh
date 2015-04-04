@@ -2,8 +2,15 @@
 
 # Get running container's IP
 IP=`hostname --ip-address | cut -f 1 -d ' '`
-if [ $# == 1 ]; then SEEDS="$1,$IP"; 
-else SEEDS="$IP"; fi
+# If broadcast address is set, use this address as the external IP (for broadcast and seed)
+if [ -z "$CASSANDRA_BROADCAST_ADDRESS" ] ; then
+	EIP=$IP
+else
+	EIP=$CASSANDRA_BROADCAST_ADDRESS
+fi
+
+if [ $# == 1 ]; then SEEDS="$1,$EIP"; 
+else SEEDS="$EIP"; fi
 
 # Setup cluster name
 if [ -z "$CASSANDRA_CLUSTERNAME" ]; then
@@ -14,10 +21,13 @@ fi
 
 
 # Dunno why zeroes here
-sed -i -e "s/^rpc_address.*/rpc_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml
+sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Listen on IP:port of the container
 sed -i -e "s/^listen_address.*/listen_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml
+
+# Listen on IP:port of the container
+sed -i -e "s/^#\? *broadcast_address.*/broadcast_address: $EIP/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Configure Cassandra seeds
 if [ -z "$CASSANDRA_SEEDS" ]; then

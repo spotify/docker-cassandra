@@ -8,7 +8,8 @@ else SEEDS="$IP"; fi
 
 # 0.0.0.0 Listens on all configured interfaces
 # but you must set the broadcast_rpc_address to a value other than 0.0.0.0
-sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" $CASSANDRA_CONFIG/cassandra.yaml
+sed -i -e "s/^rpc_address.*/# rpc_address: 0.0.0.0/" $CASSANDRA_CONFIG/cassandra.yaml
+sed -i -e "s/^#\s*rpc_address.*/rpc_interface: eth0/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Be your own seed
 sed -i -e "s/- seeds: \"127.0.0.1\"/- seeds: \"$SEEDS\"/" $CASSANDRA_CONFIG/cassandra.yaml

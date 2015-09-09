@@ -9,6 +9,8 @@ FROM java:7
 
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get update
+
 # Add DataStax sources
 ADD datastax_key /tmp/datastax_key
 RUN apt-key add /tmp/datastax_key
@@ -33,5 +35,11 @@ RUN /usr/local/bin/config-cassandra-base
 RUN rm -f /etc/security/limits.d/cassandra.conf
 
 EXPOSE 7199 7000 7001 9160 9042 22 8012 61621
+
+RUN apt-get update
+RUN apt-get -y --force-yes install python-pip
+RUN pip install cqlsh
+
+RUN apt-get update
 
 CMD [""]

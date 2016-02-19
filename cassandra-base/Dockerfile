@@ -5,13 +5,12 @@
 # Installs Cassandra 2.0 package. Does only basic configuration.
 # Tokens and seed nodes should be configured by child images.
 
-FROM dockerfile/java:oracle-java7
+FROM java:openjdk-7-jre
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # Add DataStax sources
-ADD datastax_key /tmp/datastax_key
-RUN apt-key add /tmp/datastax_key
+RUN curl -L http://debian.datastax.com/debian/repo_key | apt-key add -
 RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
 
 # Workaround for https://github.com/docker/docker/issues/6345

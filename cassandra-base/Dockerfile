@@ -11,20 +11,18 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 
-# Add DataStax sources
-ADD datastax_key /tmp/datastax_key
-RUN apt-key add /tmp/datastax_key
-RUN echo "deb http://debian.datastax.com/community stable main" > /etc/apt/sources.list.d/datastax.list
-
 # Workaround for https://github.com/docker/docker/issues/6345
 RUN ln -s -f /bin/true /usr/bin/chfn
 
 # Install Cassandra 2.1.2
-RUN apt-get update && \
-	apt-get -y --force-yes install python-pip && \
-	apt-get update && \
-    apt-get install -y --force-yes cassandra=2.1.2 dsc21=2.1.2-1 && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get -y --force-yes install python-pip && \
+       wget -O python-support_1.0.15_all.deb http://launchpadlibrarian.net/109052632/python-support_1.0.15_all.deb && \
+       wget -O cassandra_2.1.2_all.deb http://debian.datastax.com/community/pool/cassandra_2.1.2_all.deb && \
+       wget -O dsc21_2.1.2-1_all.deb http://debian.datastax.com/community/pool/dsc21_2.1.2-1_all.deb && \
+       dpkg -i python-support_1.0.15_all.deb && \
+       dpkg -i cassandra_2.1.2_all.deb && \
+       dpkg -i dsc21_2.1.2-1_all.deb && \
+       rm -rf python-support_1.0.15_all.deb python-support_1.0.15_all.deb dsc21_2.1.2-1_all.deb && \
 
 ENV CASSANDRA_CONFIG /etc/cassandra
 

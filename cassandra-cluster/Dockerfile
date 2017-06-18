@@ -6,7 +6,7 @@
 # If CASSANDRA_SEEDS is not set, node acts as its own seed
 # If CASSANDRA_TOKEN is not set, startup process is aborted
 
-FROM peerbelt/cassandra:base
+FROM peerbelt/cassandra:base-armhf-2.1.2
 
 USER root
 

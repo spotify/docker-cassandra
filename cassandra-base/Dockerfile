@@ -5,7 +5,7 @@
 # Installs Cassandra 2.0 package. Does only basic configuration.
 # Tokens and seed nodes should be configured by child images.
 
-FROM java:7
+FROM armv7/armhf-java7
 
 ENV DEBIAN_FRONTEND noninteractive
 

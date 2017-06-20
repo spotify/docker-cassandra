@@ -12,6 +12,14 @@ else
         sed -i -e "s/^cluster_name:.*/cluster_name: $CASSANDRA_CLUSTERNAME/" $CASSANDRA_CONFIG/cassandra.yaml
 fi
 
+# Setup num_tokens
+if [ -z "$CASSANDRA_NUM_TOKENS" ]; then
+        echo "No num_tokens specified, preserving default one"
+else
+        sed -i -e "s/^#\s*num_tokens:.*/num_tokens: $CASSANDRA_NUM_TOKENS/" $CASSANDRA_CONFIG/cassandra.yaml
+fi
+
+
 # 0.0.0.0 Listens on all configured interfaces
 # but you must set the broadcast_rpc_address to a value other than 0.0.0.0
 sed -i -e "s/^rpc_address.*/# rpc_address: 0.0.0.0/" $CASSANDRA_CONFIG/cassandra.yaml

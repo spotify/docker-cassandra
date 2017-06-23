@@ -12,6 +12,12 @@ else
         sed -i -e "s/^cluster_name:.*/cluster_name: $CASSANDRA_CLUSTERNAME/" $CASSANDRA_CONFIG/cassandra.yaml
 fi
 
+# Setup num_tokens
+if [ -z "$CASSANDRA_NUM_TOKENS" ]; then
+        echo "No num_tokens specified, preserving default one"
+else
+        sed -i -e "s/^#\s*num_tokens:.*/num_tokens: $CASSANDRA_NUM_TOKENS/" $CASSANDRA_CONFIG/cassandra.yaml
+fi
 
 # Dunno why zeroes here
 sed -i -e "s/^rpc_address.*/rpc_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml

@@ -5,6 +5,20 @@ IP=`hostname --ip-address`
 if [ $# == 1 ]; then SEEDS="$1,$IP"; 
 else SEEDS="$IP"; fi
 
+# Setup cluster name
+if [ -z "$CASSANDRA_CLUSTERNAME" ]; then
+        echo "No cluster name specified, preserving default one"
+else
+        sed -i -e "s/^cluster_name:.*/cluster_name: $CASSANDRA_CLUSTERNAME/" $CASSANDRA_CONFIG/cassandra.yaml
+fi
+
+# Setup num_tokens
+if [ -z "$CASSANDRA_NUM_TOKENS" ]; then
+        echo "No num_tokens specified, preserving default one"
+else
+        sed -i -e "s/^#\s*num_tokens:.*/num_tokens: $CASSANDRA_NUM_TOKENS/" $CASSANDRA_CONFIG/cassandra.yaml
+fi
+
 
 # 0.0.0.0 Listens on all configured interfaces
 # but you must set the broadcast_rpc_address to a value other than 0.0.0.0

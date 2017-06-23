@@ -10,7 +10,7 @@ USER root
 
 # Add extensible healthcheck
 ADD scripts/cassandra-healthcheck.sh /usr/local/bin/cassandra-healthcheck
-HEALTHCHECK --interval=45s --timeout=15s --retries=2 CMD [ "cassandra-healthcheck" ]
+HEALTHCHECK --interval=60s --timeout=15s --retries=5 CMD [ "cassandra-healthcheck" ]
 
 # Place single-node startup-config script
 ADD scripts/cassandra-singlenode.sh /usr/local/bin/cassandra-singlenode

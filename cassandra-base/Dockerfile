@@ -5,7 +5,7 @@
 # Installs Cassandra 2.0 package. Does only basic configuration.
 # Tokens and seed nodes should be configured by child images.
 
-FROM armv7/armhf-java7
+FROM java:7
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -22,7 +22,7 @@ RUN apt-get -y --force-yes install python-pip && \
        dpkg -i python-support_1.0.15_all.deb && \
        dpkg -i cassandra_2.1.2_all.deb && \
        dpkg -i dsc21_2.1.2-1_all.deb && \
-       rm -rf python-support_1.0.15_all.deb python-support_1.0.15_all.deb dsc21_2.1.2-1_all.deb && \
+       rm -rf python-support_1.0.15_all.deb python-support_1.0.15_all.deb dsc21_2.1.2-1_all.deb
 
 ENV CASSANDRA_CONFIG /etc/cassandra
 
